@@ -10,10 +10,13 @@ vec = @vctr::create(5);
 // Display vector
 vec.display(15, 15);
 
+// Wait some time
+wait(0.5);
+
 // Add values
-vec.display(1);
-vec.display(2);
-vec.display(3);
+vec.push(1);
+vec.push(2);
+vec.push(3);
 
 // Wait 500 ms and pop value from vector
 wait(0.5);
