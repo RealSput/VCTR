@@ -1,0 +1,75 @@
+get_value = (counter, range = 0..11) {
+    -> return counter.to_const(range);
+}
+
+type @vctr;
+impl @vctr {
+    create: (let length: @number) {
+        length = length - 1
+        let curr_index = counter(0);
+        let array = (' ' * length).split(' ').map(x => counter(0));
+
+        let range = 0..length + 1;
+        let opts = {
+            push: (n) {
+                let v = get_value(curr_index, range);
+                array[v] = n;
+                curr_index++;
+            }, 
+            display: (let x: @number, y: @number, spacing: @number = 45) {
+                for i in array {
+                    i.display(x, y);
+                    x += spacing;
+                }
+            },
+            pop: () {
+                let cunter_valu = get_value(curr_index, range);
+                let valu = get_value(array[cunter_valu], range);
+                curr_index--;
+                array[cunter_valu - 1] = 0;
+                return valu;
+            },
+            get_index: (i: @number) {
+                return get_value(array[i], range);
+            }
+        };
+
+        return opts;
+    }, from: (input) {
+        length = input.length - 1
+        let curr_index = counter(0);
+        let array = [];
+        
+        let range = 0..length + 1;
+        
+        for i in range {
+            array.push(counter(input[i]));
+        }
+        
+        let opts = {
+            push: (n) {
+                let v = get_value(curr_index, range);
+                array[v] = n;
+                curr_index++;
+            }, 
+            display: (let x: @number, y: @number, spacing: @number = 45) {
+                for i in array {
+                    i.display(x, y);
+                    x += spacing;
+                }
+            },
+            pop: () {
+                let cunter_valu = get_value(curr_index, range);
+                let valu = get_value(array[cunter_valu], range);
+                curr_index--;
+                array[cunter_valu - 1] = 0;
+                return valu;
+            },
+            get_index: (i: @number) {
+                return get_value(array[i], range);
+            }
+        };
+
+        return opts;
+    }
+}
