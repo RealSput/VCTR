@@ -26,6 +26,8 @@ vec.pop();
 ```ts
 vec = @vctr::from([1, 2, 3, 4, 5]);
 
+vec.display(15, 15);
+
 wait(0.5);
 vec.pop();
 ```
