@@ -4,6 +4,37 @@ get_value = (counter, range = 0..11) {
     -> return counter.to_const(range);
 }
 
+let opts = (length, curr_index, array, range) => {
+    push: (n) {
+        let v = get_value(curr_index, range);
+        array[v] = n;
+        curr_index++;
+    },
+    display: (let x: @number, y: @number, spacing: @number = 45) {
+        for i in array {
+            i.display(x, y);
+            x += spacing;
+        }
+    },
+    display_reverse: (let x: @number, y: @number, spacing: @number = 45) {
+        let act_spacing = (spacing * array.length) - x;
+        for i in array {
+            i.display(act_spacing, y);
+            act_spacing -= spacing;
+        }
+    },
+    pop: () {
+        let cunter_valu = get_value(curr_index, range);
+        curr_index--;
+        array[cunter_valu - 1] = 0;
+        
+         let valu = array[cunter_valu - 1]
+                
+        return valu;
+    },
+    array
+};
+
 type @vctr;
 impl @vctr {
     create: (let length: @number) {
@@ -12,39 +43,8 @@ impl @vctr {
         let array = (' ' * length).split(' ').map(x => counter(0));
 
         let range = 0..length + 1;
-        let opts = {
-            push: (n) {
-                let v = get_value(curr_index, range);
-                array[v] = n;
-                curr_index++;
-            },
-            display: (let x: @number, y: @number, spacing: @number = 45) {
-                for i in array {
-                    i.display(x, y);
-                    x += spacing;
-                }
-            },
-            display_reverse: (let x: @number, y: @number, spacing: @number = 45) {
-                let act_spacing = (spacing * array.length) - x;
-                for i in array {
-                    i.display(act_spacing, y);
-                    act_spacing -= spacing;
-                }
-            },
-            pop: () {
-                let cunter_valu = get_value(curr_index, range);
-                let valu = get_value(array[cunter_valu], range);
-                curr_index--;
-                array[cunter_valu - 1] = 0;
-                return valu;
-            },
-            get_index: (i: @number) {
-                return get_value(array[i], range);
-            },
-            array
-        };
 
-        return opts;
+        return opts(length, curr_index, array, range);
     },
     from: (input) {
         length = input.length - 1
@@ -57,38 +57,6 @@ impl @vctr {
             array.push(counter(input[i]));
         }
 
-        let opts = {
-            push: (n) {
-                let v = get_value(curr_index, range);
-                array[v] = n;
-                curr_index++;
-            },
-            display: (let x: @number, y: @number, spacing: @number = 45) {
-                for i in array {
-                    i.display(x, y);
-                    x += spacing;
-                }
-            },
-            display_reverse: (let x: @number, y: @number, spacing: @number = 45) {
-                let act_spacing = (spacing * array.length) - x;
-                for i in array {
-                    i.display(act_spacing, y);
-                    act_spacing -= spacing;
-                }
-            },
-            pop: () {
-                let cunter_valu = get_value(curr_index, range);
-                let valu = get_value(array[cunter_valu], range);
-                curr_index--;
-                array[cunter_valu - 1] = 0;
-                return valu;
-            },
-            get_index: (i: @number) {
-                return get_value(array[i], range);
-            },
-            array
-        };
-
-        return opts;
+        return opts(length, curr_index, array, range);
     }
 }
