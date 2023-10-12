@@ -28,7 +28,7 @@ let opts = (length, curr_index, array, range) => {
         curr_index--;
         array[cunter_valu - 1] = 0;
         
-         let valu = array[cunter_valu - 1]
+        let valu = array[cunter_valu - 1]
                 
         return valu;
     },
